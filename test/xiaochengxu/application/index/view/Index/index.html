@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<title>信息界面</title>
+	<!-- <style>
+	</style> -->
+</head>
+<body>
+	<div class="container">
+		<div class="clearfix">
+			<h6 style="float: right;"><a href="__URL__/login">用户登录</a></h6>
+			<h6 style="float: right;padding-right:20px"><a href="__URL__/zhuce">用户注册</a></h6>
+			<h6 style="float: left;"><a href="__APP__/Index/index">管理员登录</a></h6>
+		</div>
+		<strong style="width: 200px;margin: 0 auto;display: block;font-size: 16px">百万精英目标清单</strong>
+		<table class="table table-responsive">
+			<tr>
+				<td>排名</td>
+				<td>姓名</td>
+				<td>周期目标</td>
+				<td>今日新增</td>
+				<td>增长率</td>
+				<td>完成率</td>
+			</tr>
+			{volist name='list' id='user'}
+			<tr>
+				<td>{$i}</td>
+				<td>{$user.username}</td>
+				<td>{$user.Ttarget}</td>
+				<td>{if $date == $user.UT}{$user.DRZL}{/if}</td>
+				<td>{if $date == $user.UT}{$user.ZZL* 100}%{/if}</td>
+				<td>{if $date == $user.UT}{$user.WCL * 100}%{/if}</td>
+			</tr>
+			{/volist}
+		</table>
+		<div style="width: 329px;margin: 0 auto">{$list->render()}</div>
+	</div>
+
+
+
+	<script src="/think/static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
