@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<title>用户注册界面</title>
+</head>
+<body>
+	<div class="container">
+		<form action="__URL__/zhucePro" method="post" style="width: 500px;margin: 0 auto">
+			<h3 style="text-align: center;">请输入用户信息</h3>
+			<table class="table table-responsive">
+				<tr>
+					<td> <label for="username">请输入用户名</label> </td>
+					<td> <input type="text" name="username" id="username"> </td>
+				</tr>
+				<tr>
+					<td> <label for="phone">请输入手机号</label> </td>
+					<td> <input type="text" name="phone" id="phone"> </td>
+				</tr>
+				<tr>
+					<td> <label for="password">请输入密码</label> </td>
+					<td> <input type="password" name="password" id="password"> </td>
+				</tr>
+				<tr>
+					<td> <label for="pwd">重复密码</label> </td>
+					<td> <input type="password" name="pwd" id="pwd"> </td>
+				</tr>
+				<tr>
+					<td> <input type="submit" id="submit" value="注册" class="btn btn-default"> </td>
+					<td> <input type="reset" value="重置" class="btn btn-default"> </td>
+				</tr>
+			</table>
+		</form>
+		<div style="width: 484px;margin: 0 auto"><button class="btn btn-default"><a href="{:url('index/Index/index')}">返回首页</a></button></div>
+	</div>
+
+	<script>
+		var username = document.getElementById("username");
+		var password = document.getElementById("password");
+		var pwd = document.getElementById("pwd");
+		var submit = document.getElementById("submit");
+		submit.onclick = function(){
+			if(username.value.length == 0 || password.value.length == 0){
+				if(username.value.length == 0){
+					alert("用户名不能为空");
+					return false;
+				}else{
+					alert("密码为空");
+					return false;
+				}
+			}else if(password.value != pwd.value){
+				alert("两次密码不相同");
+				return false;
+			}else{
+				return true;
+			}
+		}
+		
+	</script>
+
+
+	<script src="/think/static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>

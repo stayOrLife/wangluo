@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+	<title>注册管理界面</title>
+</head>
+<body>
+	<div class="container" style="margin-top: 20px">
+		<a id="delAll" href="{:url('Index/emptyAll')}"  class="btn btn-danger" style="float: right;">清空数据库</a>
+		<!-- <strong style="float: left;"><a href="#">返回管理</a></strong> -->
+		<form action="__URL__/select" method="post" class="form">
+			<table class="table" style="width: 500px;margin: 0 auto;">
+				<tr>
+					<td><strong>根据电话和姓名查询用户</strong></td>
+					<td><input id="submit" type="submit" value="查询" class="btn btn-default"></td>
+				</tr>
+				<tr>
+					<td>请输入电话</td>
+					<td> <input id="phone" name="phone" type="text"> </td>
+				</tr>
+				<tr>
+					<td>请输入用户姓名</td>
+					<td> <input id="username" name="username" type="text"> </td>
+				</tr>
+			</table>
+		</form>
+		
+		{if !empty($result)}
+		<div style="text-align: center;"><strong>查询结果</strong></div>
+		<table class="table">
+			<tr>
+				<td>排名</td>
+				<td>姓名</td>
+				<td>周期目标</td>
+				<!-- <td>前一日单量</td> -->
+				<td>今日单量</td>
+				<td>今日新增</td>
+				<td>增长率</td>
+				<td>完成率</td>
+				<td>用户最新完成订单时间</td>
+				<td>初始量</td>
+				<td>删除</td>
+				<td>修改</td>
+			</tr>
+			<tr>
+				<td>{$mess}</td>
+				<td>{$result['username']}</td>
+				<td>{$result['Ttarget']}</td>
+				<td>{$result['JRDL']}</td>
+				<td>{$result['DRZL']}</td>
+				<td>{$result['ZZL']*100}%</td>
+				<td>{$result['WCL']*100}%</td>
+				<td>{$result['UT']}</td>
+				<td>{$result['CSL']}</td>
+				<td><a href="__URL__/del/phone/{$result.phone}">删除</a></td>
+				<td><a href="__URL__/update/phone/{$result.phone}">修改</a></td>
+			</tr>
+			{/if}
+		</table>
+		<strong style="width: 200px;margin: 20px auto;display: block;font-size: 16px">百万精英目标清单</strong>
+		<table class="table table-responsive">
+			<tr>
+				<td>排名</td>
+				<td>姓名</td>
+				<td>周期目标</td>
+				<!-- <td>前一日单量</td> -->
+				<td>今日单量</td>
+				<td>今日新增</td>
+				<td>增长率</td>
+				<td>完成率</td>
+				<td>用户最新完成订单时间</td>
+				<td>初始量</td>
+				<td>删除</td>
+				<td>修改</td>
+			</tr>
+			{volist name='list' id='user'}
+			<tr>
+				<td>{$i}</td>
+				<td>{$user.username}</td>
+				<td>{$user.Ttarget}</td>
+				<!-- <td>{/*$user.QYRDL*/}</td> -->
+				<td>{$user.JRDL}</td>
+				<td>{$user.DRZL}</td>
+				<td>{$user.ZZL * 100}%</td>
+				<td>{$user.WCL * 100}%</td>
+				<td>{$user.UT}</td>
+				<td>{$user.CSL}</td>
+				<td><a href="__URL__/del/phone/{$user.phone}">删除</a></td>
+				<td><a href="__URL__/update/phone/{$user.phone}">修改</a></td>
+			</tr>
+			{/volist}
+		</table>
+		<div style="width: 329px;margin: 0 auto">{$list->render()}</div>
+	</div>
+
+
+
+	<script>
+		var username = document.getElementById("username");
+		var phone = document.getElementById("phone");
+		var submit = document.getElementById("submit");
+		submit.onclick=function(){
+			if(username.value.length == 0 || phone.value.length == 0){
+				if(phone.value.length == 0){
+					alert("手机号不能为空");
+					return false;
+				}else{
+					alert("姓名不能为空");
+					return false;
+				}
+			}else{
+				return true;
+			}
+		}
+
+		var delAll = document.getElementById("delAll");
+		delAll.onclick=function() {
+			var con = confirm("清空数据库？");
+			if(con){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+	</script>
+
+
+
+	<script src="/think/static/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
